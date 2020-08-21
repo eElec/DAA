@@ -48,9 +48,9 @@ void main(){
 	{
 		printf("%d ", arr[i]);
 	}
-
+	printf("\n");
 	int elem;
-	printf("\nEnter Element to be searched: ");
+	printf("Enter Element to be searched: ");
 	scanf("%d", &elem);
 
 	time_t bst = clock();
