@@ -3,6 +3,11 @@
 #include <time.h>
 
 int qsPartition(int arr[], int p, int r){
+	int pivotr = p + rand()%(r-p);
+	int temp = arr[pivotr];
+	arr[pivotr] = arr[r];
+	arr[r] = temp;
+
 	int pivot = arr[r];
 	int i = p - 1;
 	for(int j=p; j<=r-1; j++){
@@ -15,7 +20,7 @@ int qsPartition(int arr[], int p, int r){
 		}
 	}
 	//swap
-	int temp = arr[i+1];
+	temp = arr[i+1];
 	arr[i+1] = arr[r];
 	arr[r] = temp;
 	return i+1;
@@ -30,8 +35,19 @@ void quickSort(int arr[], int p, int r){
 }
 
 void main(){
-	int n = 10;
-	int arr[n];
+	// int n = 10;
+	// int arrt[10];
+	// for(int i=0; i<10; i++){
+	// 	arrt[i] = rand()%100 + 1;
+	// }
+	// for(int i=0; i<10; i++){
+	// 	printf("%d ", arrt[i]);
+	// }
+	// printf("\n");
+	// quickSort(arrt, 0, 9);
+	// for(int i=0; i<10; i++){
+	// 	printf("%d ", arrt[i]);
+	// }
 	printf("n \tAscending \tDescending \tRandom\n");
 	for(int n=1000; n<=10000; n+=1000){
 		int arr[n];
