@@ -28,25 +28,47 @@ int getRightChild(int pos){
 void maxHeapify(Heap *hp, int pos){
 	if(pos > (hp->heapsize)/2 && pos<hp->heapsize){
 		// if the parent is smaller than either of the child
-		if(hp->heap[pos] < hp->heap[getLeftChild(pos)] || hp->heap[pos] < hp->heap[getRightChild(pos)]){
+		int l = getLeftChild(pos);
+		int r = getRightChild(pos);
+		if(hp->heap[pos] < hp->heap[l] || hp->heap[pos] < hp->heap[r]){
 
 			//Swap with largest
-			if(hp->heap[getLeftChild(pos)] > hp->heap[getRightChild(pos)]){
-				swap(&hp->heap[pos], &hp->heap[getLeftChild(pos)]);
-				maxHeapify(hp, getLeftChild(pos));
+			if(hp->heap[l] > hp->heap[r]){
+				swap(&hp->heap[pos], &hp->heap[l]);
+				maxHeapify(hp, l);
 			}
 			else{
-				swap(&hp->heap[pos], &hp->heap[getRightChild(pos)]);
-				maxHeapify(hp, getRightChild(pos));
+				swap(&hp->heap[pos], &hp->heap[r]);
+				maxHeapify(hp, r);
 			}
 		}
+	}
+}
+
+void heapify(Heap *hp, int i)
+{
+	int largest = i;
+	int left = 2 * i + 1;
+	int right = 2 * i + 2;
+
+	if (left < hp->heapsize && hp->heap[left] > hp->heap[largest])
+		largest = left;
+
+	if (right < hp->heapsize && hp->heap[right] > hp->heap[largest])
+		largest = right;
+
+	if (largest != i)
+	{
+		swap(&hp->heap[i], &hp->heap[largest]);
+		heapify(hp, largest);
 	}
 }
 
 void removeMax(Heap *hp){
 	hp->heapsize--;
 	hp->heap[0] = hp->heap[hp->heapsize];
-	maxHeapify(hp, 0);
+	// maxHeapify(hp, 0);
+	heapify(hp, 0);
 }
 
 void insertElement(Heap *hp, int elem){
@@ -74,7 +96,7 @@ void increaseVal(Heap *hp, int pos, int val)
 		return;
 	}
    hp->heap[pos] = val;
-   maxHeapify(hp, 0);
+   heapify(hp, 0);
 }
 
 void printHeap(Heap *hp){
@@ -97,7 +119,6 @@ void main(){
 		scanf("%d", &t);
 		insertElement(&hp, 	t);
 	}
-
 	for(int i=0; i<hp.heapsize; i++){
 		printf("%d ", hp.heap[i]);
 	}
@@ -109,6 +130,8 @@ void main(){
 		printf("%d ", hp.heap[i]);
 	}
 	printf("\n");
+
+	printf("After IncreaseVal(1, 12): ");
 	increaseVal(&hp, 1, 12);
 	for(int i=0; i<hp.heapsize; i++){
 		printf("%d ", hp.heap[i]);
