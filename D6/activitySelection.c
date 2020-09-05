@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdio.h>
+#include <time.h>
 
 typedef struct{
 	int startTime;
@@ -59,6 +60,7 @@ void main(){
 		scanf("%d", &ac[i].endTime);
 	}
 
+	clock_t clk = clock();
 	//O(nlogn) sort
 	heapSort(ac, n);
 
@@ -70,5 +72,7 @@ void main(){
 			curr = i;
 		}
 	}
+	clk = clock() - clk;
 	printf("Number of Activities that can be performed: %d\n", count);
+	printf("\nTime Taken: %f\n", (float)clk/(float)CLOCKS_PER_SEC);
 }

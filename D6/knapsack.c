@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef struct{
 	float weight;
@@ -65,6 +66,7 @@ void main(){
 	printf("Enter Max Weight: ");
 	scanf("%f", &MaxWeight);
 
+	clock_t clk = clock();
 	//O(nLogn) sort
 	heapSort(ks, n);
 
@@ -82,6 +84,7 @@ void main(){
 	if(MaxWeight > 0){
 		MaxPrice += ks[i].price*(MaxWeight/ks[i].weight);
 	}
-
+	clk = clock() - clk;
 	printf("Max Price: %f\n", MaxPrice);
+	printf("\nTime Taken: %f\n", (float)clk/(float)CLOCKS_PER_SEC);
 }
