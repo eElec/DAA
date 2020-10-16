@@ -17,7 +17,7 @@ void BFS(struct Graph* graph, int startVertex) {
   while (!isEmpty(q)) {
     printQueue(q);
     int currentVertex = dequeue(q);
-    printf("Visited %d\n", currentVertex);
+    printf("%d ", currentVertex + 1);
 
     struct node* temp = graph->adjLists[currentVertex];
 
@@ -45,5 +45,7 @@ void main(){
 	addEdge(adjGraph, 4, 6);
 	addEdge(adjGraph, 5, 6);
 
+	printf("BFS: ");
 	BFS(adjGraph, 0);
+	printf("\n");
 }

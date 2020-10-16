@@ -68,18 +68,7 @@ void main(){
 	addEdge(adjArr, 3, 5);
 	addEdge(adjArr, 4, 6);
 	addEdge(adjArr, 5, 6);
-
-	for(int i=0; i<=6; i++){
-		printf("%d\t", i);
-	}
-	printf("\n");
-	for(int i=0; i<6; i++){
-		printf("%d\t", i);
-		for(int j=0; j<6; j++){
-			printf("%d\t", adjArr[i][j]);
-		}
-		printf("\n");
-	}
+	
 	printf("DFS: ");
 	DFS(adjArr);
 	printf("\n");
